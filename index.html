@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gov Secure Document Sharing</title>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+    <nav>
+        <div class="header">
+            <ul>
+                <li>
+                    <a href="#" class="portal" onclick="showPage('home')">Government Secure Document Sharing Portal</a>
+                </li>
+                <div class="list">
+                    <li><a href="#" onclick="showPage('register')">Register Now</a></li>
+                    <li><a href="#" onclick="showPage('login')">Login</a></li>
+                    <li><a href="#" onclick="showPage('profile')">Profile</a></li>
+                    <li><a href="#" onclick="logout()">Logout</a></li>
+                </div>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Home Page -->
+        <div id="home" class="page active">
+            <h2>Welcome to Government Document Portal</h2>
+            <h4>Secure, Delete, Update Documents</h4>
+            <p>Welcome to our secure government document sharing portal. Create your account to manage your documents safely.</p>
+            <div style="text-align: center;">
+                <button class="btn" onclick="showPage('register')">Register Now</button>
+                <button class="btn" onclick="showPage('login')" style="margin-left: 1rem;">Login</button>
+            </div>
+        </div>
+
+        <!-- OTP Verification Page -->
+        <div id="otp" class="page">
+            <div class="form-container">
+                <h2>OTP Verification</h2>
+                <div class="otp-hint">
+                    Demo OTP Password: 123456
+                </div>
+                <form id="otp-form">
+                    <div class="form-group">
+                        <label for="phonenum">Phone Number (+91)</label>
+                        <input type="tel" id="phonenum" placeholder="Enter 10-digit phone number" required>
+                    </div>
+                    <button type="button" class="btn" onclick="sendOTP()">Send OTP</button>
+                    
+                    <div class="form-group" style="margin-top: 2rem;">
+                        <label for="otp">Enter OTP (Use: 123456)</label>
+                        <input type="text" id="otp" placeholder="Enter OTP: 123456" maxlength="6">
+                    </div>
+                    <button type="button" class="btn" onclick="verifyOTP()">Verify OTP</button>
+                </form>
+                <div id="otp-message"></div>
+            </div>
+        </div>
+
+        <!-- Registration Page -->
+        <div id="register" class="page">
+            <div class="form-container">
+                <h2>Register</h2>
+                <form id="register-form">
+                    <div class="form-group">
+                        <label for="reg-email">Email</label>
+                        <input type="email" id="reg-email" placeholder="abc@gmail.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="reg-password">Password</label>
+                        <input type="password" id="reg-password" placeholder="Enter strong password" required>
+                    </div>
+                    <button type="submit" class="btn">Register</button>
+                </form>
+                <div id="register-message"></div>
+            </div>
+        </div>
+
+        <!-- Login Page -->
+        <div id="login" class="page">
+            <div class="form-container">
+                <h2>Login</h2>
+                <form id="login-form">
+                    <div class="form-group">
+                        <label for="login-email">Email</label>
+                        <input type="email" id="login-email" placeholder="abc@gmail.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password">Password</label>
+                        <input type="password" id="login-password" placeholder="Enter your password" required>
+                    </div>
+                    <button type="submit" class="btn">Login</button>
+                </form>
+                <div id="login-message"></div>
+                <p style="text-align: center; margin-top: 1rem;">
+                    Don't have an account? <a href="#" onclick="showPage('otp')" style="color: #667eea;">Sign up with OTP</a>
+                </p>
+            </div>
+        </div>
+
+        <!-- Profile Page -->
+        <div id="profile" class="page">
+            <div class="form-container">
+                <h2>My Profile</h2>
+                <form id="profile-form">
+                    <div class="form-group">
+                        <label for="firstname">First Name</label>
+                        <input type="text" id="firstname" placeholder="First Name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastname">Last Name</label>
+                        <input type="text" id="lastname" placeholder="Last Name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="aadharNumber">Aadhaar Number</label>
+                        <input type="text" id="aadharNumber" placeholder="Enter 12-digit Aadhaar number" maxlength="12" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" placeholder="abc@gmail.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="gender">Gender</label>
+                        <input type="text" id="gender" placeholder="Male/Female/Other" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="date">Date of Birth</label>
+                        <input type="date" id="date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="age">Age</label>
+                        <input type="number" id="age" placeholder="Age" min="1" max="120" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="country">Country</label>
+                        <input type="text" id="country" placeholder="India" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="state">State</label>
+                        <input type="text" id="state" placeholder="State" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="city">City</label>
+                        <input type="text" id="city" placeholder="City" required>
+                    </div>
+                    <button type="submit" class="btn">Save Profile</button>
+                </form>
+                <div id="profile-message"></div>
+                <div id="profile-details"></div>
+            </div>
+        </div>
+
+        <!-- Document Management Page -->
+        <div id="documents" class="page">
+            <div class="form-container">
+                <h2>Document Management</h2>
+                
+                <!-- Upload Section -->
+                <div class="upload-area">
+                    <h3>Upload Documents</h3>
+                    <input type="file" id="file-input" class="file-input" multiple accept=".doc,.docx,.pdf,.jpg,.jpeg,.png">
+                    <p>Drag and drop files here or click to select</p>
+                    <button type="button" class="btn" onclick="uploadFiles()">Upload Files</button>
+                </div>
+                <div id="upload-message"></div>
+
+                <!-- Delete Section -->
+                <div class="delete-section">
+                    <h4>Delete File</h4>
+                    <div class="form-group">
+                        <label for="fileName">File Name to Delete</label>
+                        <input type="text" id="fileName" placeholder="Enter exact file name">
+                    </div>
+                    <button type="button" class="btn" onclick="deleteFile()" style="background: linear-gradient(45deg, #e53e3e, #c53030);">Delete File</button>
+                </div>
+                <div id="delete-message"></div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div id="signoutsuccess" style="text-align: center; padding: 2rem; color: white;"></div>
+    </footer>
+
+    <script src="https://www.gstatic.com/firebasejs/10.12.3/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.3/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.4/firebase-storage-compat.js"></script>
+
+
+</body>
+<script src="auth.js"></script>
+</html>
